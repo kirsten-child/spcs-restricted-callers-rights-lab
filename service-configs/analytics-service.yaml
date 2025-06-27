@@ -1,0 +1,49 @@
+spec:
+  containers:
+  - name: analytics-service
+    image: /spcs_restricted_demo/container_registry/analytics_repo/spcs-restricted-analytics:v1.0
+    env:
+      PORT: "8080"
+      LOG_LEVEL: "INFO"
+    readinessProbe:
+      port: 8080
+      path: /health
+    resources:
+      requests:
+        memory: 512Mi
+        cpu: 0.5
+      limits:
+        memory: 1Gi
+        cpu: 1.0
+  endpoints:
+  - name: analytics-api
+    port: 8080
+    public: true
+    protocol: HTTP
+    corsSettings:
+      Access-Control-Allow-Origin:
+        - "https://app.snowflake.com"
+        - "https://snowsight.snowflake.com" 
+      Access-Control-Allow-Methods:
+        - GET
+        - POST
+        - OPTIONS
+      Access-Control-Allow-Headers:
+        - Content-Type
+        - Authorization
+        - Sf-Context-Current-User-Token
+  logExporters:
+    eventTableConfig:
+      logLevel: INFO
+  platformMonitor:
+    metricConfig:
+      groups:
+      - system
+      - container
+capabilities:
+  securityContext:
+    executeAsCaller: true  # This enables restricted caller's rights
+serviceRoles:
+- name: analytics_users
+  endpoints:
+  - analytics-api 

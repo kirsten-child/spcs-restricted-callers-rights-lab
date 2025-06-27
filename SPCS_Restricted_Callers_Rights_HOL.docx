@@ -1,0 +1,240 @@
+# Snowflake Solution Engineering University
+## Hands-On Lab: SPCS Restricted Callers Rights
+### Secure Multi-Tenant Container Applications
+
+---
+
+**Lab Duration:** 90 minutes  
+**Difficulty Level:** Intermediate  
+**Prerequisites:** Basic understanding of Snowpark Container Services, SQL, and Docker  
+**Industry Focus:** Financial Services (Multi-tenant SaaS Platform)
+
+---
+
+## Lab Overview
+
+In this hands-on lab, you will learn how to implement and sell Snowflake's SPCS (Snowpark Container Services) Restricted Callers Rights feature. This powerful security capability allows containerized applications to execute with user-specific privileges while maintaining strict access controls—perfect for multi-tenant applications where data isolation is critical.
+
+### Learning Objectives
+
+By the end of this lab, you will be able to:
+
+1. **Technical Mastery:**
+   - Configure SPCS services with Restricted Callers Rights
+   - Implement caller grants for fine-grained access control
+   - Build secure multi-tenant container applications
+   - Troubleshoot common configuration issues
+
+2. **Sales Enablement:**
+   - Identify ideal customer use cases for Restricted Callers Rights
+   - Position the feature against competitive solutions
+   - Handle common objections around container security
+   - Demonstrate ROI and business value
+
+3. **Customer Discovery:**
+   - Ask the right qualifying questions
+   - Recognize security compliance requirements
+   - Map customer pain points to solution benefits
+
+---
+
+## Business Context: SecureFinance Analytics Platform
+
+**Customer Profile:** SecureFinance is a growing FinTech company that provides analytics dashboards for multiple financial institutions. Each client requires strict data isolation while sharing the same application infrastructure.
+
+**Current Pain Points:**
+- Complex multi-tenant security management
+- Risk of data leakage between clients
+- Compliance requirements (SOX, PCI DSS)
+- Operational overhead of managing separate environments
+
+**Solution Value Proposition:**
+SPCS Restricted Callers Rights enables SecureFinance to deploy a single containerized application that automatically enforces client-specific data access based on user identity, reducing security risks and operational complexity.
+
+---
+
+## Section 1: Understanding the Technology
+
+### What is SPCS Restricted Callers Rights?
+
+SPCS Restricted Callers Rights is a security feature that allows containerized services to execute with the privileges of the calling user, but only for explicitly granted permissions. This provides a "least privilege" approach to container security.
+
+**Key Components:**
+1. **Caller's Rights Execution:** Containers run with user privileges, not service owner privileges
+2. **Caller Grants:** Explicit permissions that define what user privileges the container can access
+3. **Service Specification:** Container configuration that enables caller's rights mode
+
+### Architecture Overview
+
+```
+User Authentication → Service Call → Privilege Check → Container Execution
+     ↓                    ↓              ↓                ↓
+  User Role         executeAsCaller   Caller Grants   User Data Access
+```
+
+### Why This Matters for Customers
+
+**Traditional Approach Problems:**
+- Containers run with elevated service account privileges
+- Risk of unauthorized data access across tenants
+- Complex custom security implementations
+- Difficult compliance validation
+
+**SPCS Restricted Callers Rights Benefits:**
+- Automatic user-level security enforcement
+- Native Snowflake governance integration
+- Simplified multi-tenant architecture
+- Built-in compliance controls
+
+---
+
+## Section 2: Customer Discovery Framework
+
+### Qualifying Questions
+
+**Security & Compliance:**
+1. "How do you currently ensure data isolation in your multi-tenant applications?"
+2. "What compliance frameworks are you subject to? (SOX, GDPR, HIPAA, etc.)"
+3. "Have you experienced any security incidents with shared application infrastructure?"
+4. "How do you audit data access across different user groups?"
+
+**Technical Architecture:**
+1. "Are you using containerized applications for your data services?"
+2. "How do you manage user authentication and authorization across applications?"
+3. "Do you have applications that need to access Snowflake data with user-specific permissions?"
+4. "What's your current approach to multi-tenant security?"
+
+**Business Impact:**
+1. "How much time does your team spend managing security policies across environments?"
+2. "What's the business impact of potential data exposure between clients?"
+3. "How quickly can you onboard new clients with existing infrastructure?"
+4. "What are your biggest operational security challenges?"
+
+### Ideal Customer Profile
+
+**Primary Indicators:**
+- Multi-tenant SaaS applications
+- Strict data isolation requirements
+- Compliance obligations (Financial, Healthcare, Government)
+- Container-based architecture (current or planned)
+
+**Industry Verticals:**
+- Financial Services (Banking, Insurance, FinTech)
+- Healthcare (EHR systems, Analytics platforms)
+- Government (Citizen services, Data platforms)
+- Technology (SaaS providers, Data marketplaces)
+
+**Technical Requirements:**
+- Snowflake data platform adoption
+- Container orchestration capabilities
+- User authentication systems
+- Multi-tenant application architecture
+
+---
+
+## Section 3: Value Proposition and Messaging
+
+### Primary Value Drivers
+
+**1. Enhanced Security Posture**
+- *Message:* "Eliminate the risk of privilege escalation by ensuring containers can only access data the user is authorized to see"
+- *Customer Benefit:* Reduced security incidents and compliance violations
+- *Proof Point:* Row-level security enforced at the container level
+
+**2. Simplified Multi-Tenancy**
+- *Message:* "Deploy once, secure everywhere - single application serves multiple tenants with automatic data isolation"
+- *Customer Benefit:* Lower operational overhead and faster feature deployment
+- *Proof Point:* Same service returning different data for different users
+
+**3. Compliance Readiness**
+- *Message:* "Built-in audit trails and access controls that satisfy the most stringent compliance requirements"
+- *Customer Benefit:* Simplified compliance reporting and reduced audit costs
+- *Proof Point:* Query history shows exactly what data each user accessed
+
+**4. Operational Efficiency**
+- *Message:* "Reduce infrastructure complexity and management overhead with centralized security controls"
+- *Customer Benefit:* Lower TCO and faster time-to-market
+- *Proof Point:* Single service specification manages security for all tenants
+
+### Competitive Positioning
+
+**vs. AWS EKS/ECS with IAM:**
+- *Snowflake Advantage:* Native integration with data platform, no complex IAM role mapping
+- *Customer Benefit:* Reduced complexity and improved security posture
+- *Supporting Evidence:* Fewer configuration steps, native Snowflake governance
+
+**vs. Azure AKS with Azure AD:**
+- *Snowflake Advantage:* Data-native security model, unified governance
+- *Customer Benefit:* Simplified compliance reporting and audit trails
+- *Supporting Evidence:* Single pane of glass for data and application security
+
+**vs. Custom-built solutions:**
+- *Snowflake Advantage:* Fully managed, tested at scale, immediate availability
+- *Customer Benefit:* Faster time-to-market, lower development costs
+- *Supporting Evidence:* Pre-built security framework vs. months of custom development
+
+---
+
+## Section 4: Objection Handling
+
+### Common Objections and Responses
+
+**Objection 1:** "We already have container security with Kubernetes RBAC"
+
+*Response Strategy:*
+"Kubernetes RBAC is excellent for infrastructure access, but it doesn't provide data-level access controls. Let me show you the difference..."
+
+*Demo Approach:*
+- Show how RBAC controls container access but not data access
+- Demonstrate SPCS preventing data leakage that RBAC alone cannot address
+- Highlight integration with Snowflake's existing security model
+
+*Follow-up Questions:*
+- "How do you currently prevent users from accessing other tenants' data within the same application?"
+- "What happens if your application code has a bug that exposes unauthorized data?"
+
+**Objection 2:** "This seems complex to implement"
+
+*Response Strategy:*
+"I understand that concern. Most customers find this actually reduces complexity because you're managing security in one place rather than across multiple layers..."
+
+*Demo Approach:*
+- Walk through the simple service specification setup
+- Compare to their current multi-tenant security approach
+- Show the minimal code changes required
+
+*Follow-up Questions:*
+- "How many different systems do you currently manage for multi-tenant security?"
+- "What would simplified security management mean for your development velocity?"
+
+**Objection 3:** "What about performance impact?"
+
+*Response Strategy:*
+"Great question. The security evaluation happens at query planning time, not execution time, so there's minimal performance impact..."
+
+*Demo Approach:*
+- Show query execution times with and without caller's rights
+- Demonstrate that network latency reduction often improves overall performance
+- Explain the query optimization benefits
+
+*Follow-up Questions:*
+- "What's your current network latency between applications and Snowflake?"
+- "How important is query performance for your user experience?"
+
+**Objection 4:** "We're not ready for containers yet"
+
+*Response Strategy:*
+"That's perfectly fine. SPCS Restricted Callers Rights is just one security option in your toolkit. When you do move to containerized applications - which 87% of enterprises plan to do according to CNCF - you'll have this capability ready..."
+
+*Demo Approach:*
+- Acknowledge their current state
+- Show other Snowflake security features for immediate needs
+- Position SPCS as future-ready capability
+
+*Follow-up Questions:*
+- "What's driving your interest in containerization roadmap?"
+- "How are you handling multi-tenant security today?"
+
+---
+
+*End of Part 1 - This document continues with technical implementation, hands-on exercises, and additional sections...* 
