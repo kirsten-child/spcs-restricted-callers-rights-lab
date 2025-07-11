@@ -72,7 +72,7 @@ User Authentication → Service Call → Privilege Check → Container Execution
   User Role         executeAsCaller   Caller Grants   User Data Access
 ```
 
----
+---      
 
 ## Section 2: Environment Setup
 
@@ -88,6 +88,8 @@ User Authentication → Service Call → Privilege Check → Container Execution
    USE DATABASE SPCS_RESTRICTED_DEMO;
    CREATE OR REPLACE SCHEMA FINANCIAL_DATA;
    USE SCHEMA FINANCIAL_DATA;
+   
+   CREATE IMAGE REPOSITORY IF NOT EXISTS ANALYTICS_REPO;
    ```
 
 ### Step 2: Create Lab Resources
